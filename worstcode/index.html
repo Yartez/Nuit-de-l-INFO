@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Le Clicker de l'Enfer</title>
+    <style>
+        body {
+            background-color: #ff69b4;
+            font-family: "Comic Sans MS", cursive;
+        }
+        .clicker-button {
+            font-size: 48px;
+            padding: 20px;
+            background-color: lime;
+            border: 5px solid magenta;
+            cursor: pointer;
+        }
+        #compteurAffichage {
+            font-size: 64px;
+        }
+    </style>
+</head>
+<body>
+    <div id="compteurAffichage">Chargement...</div>
+    <button id="clicker" class="clicker-button">Cliquer (si tu oses)</button>
+
+    <script>
+        function fetchCompteur() {
+            fetch('get_compteur.php')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('compteurAffichage').innerHTML = `<marquee>Compteur : ${data.compteur}</marquee>`;
+                });
+        }
+
+        function incrementCompteur() {
+            fetch('update_compteur.php')
+                .then(response => response.text())
+                .then(data => {
+                    console.log("Compteur mis à jour : " + data);
+                    fetchCompteur(); // Rafraîchir l'affichage après incrémentation
+                });
+        }
+
+        document.getElementById('clicker').addEventListener('click', function() {
+            incrementCompteur();
+        });
+
+        // Charger le compteur au démarrage
+        fetchCompteur();
+    </script>
+</body>
+</html>
