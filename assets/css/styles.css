@@ -1,0 +1,117 @@
+/* styles.css */
+
+
+:root {
+    --black-color: #000;
+    --white-color: #fff;
+    --light-color: #f1f1f1;
+    --primary-color: #0063a8;
+    --secondary-color: #61b3e3;
+    --darken-color: #162751;
+}
+
+/* styles.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+    height: 200vh; /* For scrolling */
+    background-color: var(--darken-color);
+}
+
+.scroll-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+/* human-body */
+.human-body {
+    position: relative;
+    width: 80vw;
+    margin: 0 auto;
+}
+
+.human-body img {
+    width: 100%;
+    height: 100vh;
+    object-fit: contain;
+    transition: transform 0.3s ease-in-out;
+}
+.scroll-content {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* scroll-item */
+.scroll-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 250px;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    color: var(--white-color);
+    background-color: var(--darken-color);
+    border-bottom: .3rem solid var(--secondary-color);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+.scroll-item.active {
+    opacity: 1;
+}
+
+.scroll-item .item-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+.scroll-item h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+.scroll-item p {
+    font-size: 1rem;
+    color: var(--light-color);
+}
+.scroll-item .item-img {
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: brightness(0.6);
+}
+.scroll-item .item-img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Position des items */
+.scroll-item:nth-child(2n) {
+    top: calc(50% - 125px);
+    left: calc(80% - 200px);
+}
+.scroll-item:nth-child(2n + 1) {
+    top: calc(50% - 125px);
+    left: 10%;
+}
