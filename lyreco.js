@@ -23,7 +23,15 @@ const lyreco_min = 50;
 const lyreco_max = 150;
 const lyreco_div = document.createElement('div');
 
-//const animations = {0:asciiAnim};
+const animations = {"0":"draw", "1":"draw", "2":"explosion", "14":"casse brick.html", "16":"snake.html","19":"tetris"};
+
+function getValue(dict, key, defaultValue) {
+    if (key in dict) {
+        return dict[key];
+    } else {
+        return defaultValue;
+    }
+}
 
 let lyreco_stop = false;
 let annimTriggered = false;
@@ -39,10 +47,10 @@ lyreco_div.style.position = "absolute";
 
 lyreco_div.onclick = triggerAnnimation;
 
-const lyreco_imageNumber = Math.floor(Math.random() * (22 + 1));
+let lyreco_imageNumber = Math.floor(Math.random() * (22 + 1));
 // Crée l'élément img
 const lyreco_img = document.createElement('img');
-lyreco_img.src = 'http://nuitinfo.cyclonicforce.fr/raceforwater/lyreco/assets/'+lyreco_imageNumber+'.png';
+lyreco_img.src = 'assets/'+lyreco_imageNumber+'.png';
 lyreco_img.alt = "Lyreco"
 
 lyreco_img.style.position = "absolute";
@@ -99,7 +107,7 @@ function triggerModal(url) {
     const modal = `<div id="modal" style="display: none;">
         <div id="modalContent">
             <button onclick="closeModal();">&times;</button>
-            <iframe src="http://nuitinfo.cyclonicforce.fr/raceforwater/lyreco/anims/${url}" height="${window.innerHeight*0.9}px" width="${window.innerHeight*0.9}px"></iframe>
+            <iframe src="anims/${url}" height="${window.innerHeight*0.9}px" width="${window.innerHeight*0.9}px"></iframe>
         </div>
     </div>`;
     const element = document.getElementById('Lyreco_element');
@@ -119,7 +127,7 @@ function triggerAnnimation() {
     element.style.left = '0px';
     element.style.opacity = 0.99;
 
-    triggerModal("tetris");
+    triggerModal(getValue(animations, lyreco_imageNumber, "tetris"));
     lyreco_img.style.display = "none";
 }
 
@@ -151,7 +159,7 @@ function addSweating() {
     const element = document.getElementById('Lyreco_element');
     element.style.opacity = 0.75;
     const img2 = document.createElement('img');
-    img2.src = 'http://nuitinfo.cyclonicforce.fr/raceforwater/lyreco/assets/sweating.png';
+    img2.src = 'assets/sweating.png';
     img2.alt = 'Sweating';
 
     img2.height = lyreco_img.height / 1.5;
