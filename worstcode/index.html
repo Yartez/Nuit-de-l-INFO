@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coffu' Klique</title>
     <script>
-        let score = 0;
-        let scoreElement = document.getElementById("score");
-        setInterval(() => {
-            score++;
-            scoreElement.innerHTML = score; 
-        }, 1000);
+        document.addEventListener('DOMContentLoaded', () => {
+            let score = 0;
+            let scoreElement = document.getElementById("score");
+            setInterval(() => {
+                score++;
+                scoreElement.innerHTML = score; 
+            }, 1000);
+        });
     </script>
 </head>
 <body style="overflow: hidden;">
