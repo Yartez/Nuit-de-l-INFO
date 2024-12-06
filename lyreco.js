@@ -26,6 +26,7 @@ const lyreco_div = document.createElement('div');
 //const animations = {0:asciiAnim};
 
 let lyreco_stop = false;
+let annimTriggered = false;
 
 lyreco_div.className = 'random-element';
 lyreco_div.id = 'Lyreco_element';
@@ -63,7 +64,6 @@ lyreco_img.onload = function() {
 
 };
 
-// Function to open the modal
 function openModal() {
     const modal = document.getElementById('modal');
     modal.style.display = 'block';
@@ -86,7 +86,6 @@ function openModal() {
     modalContent.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
 }
 
-// Function to close the modal
 function closeModal() {
     const element = document.getElementById('Lyreco_element');
     element.remove();
@@ -98,12 +97,13 @@ function triggerModal(url) {
     const modal = `<div id="modal" style="display: none;">
         <div id="modalContent">
             <button onclick="closeModal();">&times;</button>
-            <iframe scr="${url}"></iframe>
+            <iframe src="${url}" height="${window.innerHeight*0.9}px" width="${window.innerHeight*0.9}px"></iframe>
         </div>
     </div>`;
     const element = document.getElementById('Lyreco_element');
     element.innerHTML = modal;
     openModal();
+    annimTriggered = true;
 }
 
 
@@ -115,8 +115,9 @@ function triggerAnnimation() {
     lyreco_img.style.height = `${window.innerHeight}px`;
     element.style.top = '0px';
     element.style.left = '0px';
+    element.style.opacity = 0.99;
 
-    triggerModal("test.html");
+    triggerModal("anims/tetris/index.html");
     lyreco_img.style.display = "none";
 }
 
@@ -162,24 +163,26 @@ function addSweating() {
 }
 
 function fleeMouse(event) {
-    const element = document.getElementById('Lyreco_element');
-    if (element && !lyreco_stop) {
-        lyreco_stop = Math.floor(Math.random() * (999)) == 25;
-        const rect = element.getBoundingClientRect();
+    if (!annimTriggered) {
+        const element = document.getElementById('Lyreco_element');
+        if (element && !lyreco_stop) {
+            lyreco_stop = Math.floor(Math.random() * (999)) == 25;
+            const rect = element.getBoundingClientRect();
 
-        // Distance entre la souris et le centre de l'élément
-        const dx = event.clientX - (rect.left + rect.width / 2);
-        const dy = event.clientY - (rect.top + rect.height / 2);
-        const distance = Math.sqrt(dx * dx + dy * dy);
+            // Distance entre la souris et le centre de l'élément
+            const dx = event.clientX - (rect.left + rect.width / 2);
+            const dy = event.clientY - (rect.top + rect.height / 2);
+            const distance = Math.sqrt(dx * dx + dy * dy);
 
-        // Si la souris est trop proche, repositionnez l'élément
-        if (distance < (lyreco_max+20)*lyreco_aspectRatio) { // Rayon de détection
-            const position = getRandomPosition();
-            element.style.left = `${position.x}px`;
-            element.style.top = `${position.y}px`;
+            // Si la souris est trop proche, repositionnez l'élément
+            if (distance < (lyreco_max+20)*lyreco_aspectRatio) { // Rayon de détection
+                const position = getRandomPosition();
+                element.style.left = `${position.x}px`;
+                element.style.top = `${position.y}px`;
+            }
+        } else if (lyreco_stop) {
+            addSweating();
         }
-    } else if (lyreco_stop) {
-        addSweating();
     }
 }
 
