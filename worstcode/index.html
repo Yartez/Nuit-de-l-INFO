@@ -23,6 +23,7 @@
 <body>
     <div id="compteurAffichage">Chargement...</div>
     <button id="clicker" class="clicker-button">Cliquer (si tu oses)</button>
+    <div id="historiqueAffichage">Historique des 5 derniers clics :</div>
 
     <script>
         function fetchCompteur() {
@@ -30,6 +31,14 @@
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('compteurAffichage').innerHTML = `<marquee>Compteur : ${data.compteur}</marquee>`;
+                    
+                    // Afficher l'historique
+                    let historiqueHTML = '<ul>';
+                    data.historique.forEach(function(entry) {
+                        historiqueHTML += `<li>${entry.ancien_compteur} ➡️ ${entry.nouveau_compteur} à ${entry.update_time}</li>`;
+                    });
+                    historiqueHTML += '</ul>';
+                    document.getElementById('historiqueAffichage').innerHTML = historiqueHTML;
                 });
         }
 
