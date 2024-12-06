@@ -79,8 +79,6 @@
             dataBox.innerHTML = `<strong>Row ${rowIndex + 1} - ${columnName}:</strong> ${value}`;
             container.appendChild(dataBox);
         }
-    </script>
-    <script>
         function fetchCompteur() {
             fetch('get_compteur.php')
                 .then(response => response.json())
