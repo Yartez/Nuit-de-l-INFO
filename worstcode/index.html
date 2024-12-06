@@ -93,7 +93,7 @@
                         historiqueHTML += `<li>${entry.ancien_compteur} ➡️ ${entry.nouveau_compteur} à ${entry.update_time}</li>`;
                     });
                     historiqueHTML += '</ul>';
-                    document.getElementById('historiqueAffichage').innerHTML = historiqueHTML;
+                    
                 })
                 .catch(error => console.error('Erreur:', error));
         }
