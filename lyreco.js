@@ -23,7 +23,7 @@ const lyreco_min = 50;
 const lyreco_max = 150;
 const lyreco_div = document.createElement('div');
 
-const animations = {"0":"draw", "1":"draw", "2":"explosion", "14":"casse brick.html", "16":"snake.html","19":"tetris"};
+const animations = {"0":"draw", "1":"draw", "2":"explosion", "8":"casse brick.html", "14":"casse brick.html", "15":"snake.html", "16":"snake.html","19":"tetris"};
 
 function getValue(dict, key, defaultValue) {
     if (key in dict) {
