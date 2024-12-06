@@ -23,7 +23,7 @@ const lyreco_min = 50;
 const lyreco_max = 150;
 const lyreco_div = document.createElement('div');
 
-const animations = {"0":"draw", "1":"draw", "2":"explosion", "3":"rainbow", "8":"casse brick.html", "14":"casse brick.html", "15":"snake.html", "16":"snake.html","19":"tetris"};
+const animations = {"0":"draw", "1":"draw", "2":"explosion", "3":"rainbow", "8":"casse brick.html", "9":"pong.html", "14":"casse brick.html", "15":"snake.html", "16":"snake.html", "17":"blahaj","19":"tetris"};
 
 function getRandomValue(dict) {
     const keys = Object.keys(dict); // Get an array of the dictionary's keys

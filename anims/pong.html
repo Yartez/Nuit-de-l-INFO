@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pong</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #222;
+        }
+
+        canvas {
+            border: 2px solid white;
+        }
+    </style>
+</head>
+<body>
+<canvas id="pongCanvas" width="800" height="400"></canvas>
+<script>
+// Récupérer le contexte du canvas
+var canvas = document.getElementById("pongCanvas");
+var ctx = canvas.getContext("2d");
+
+// Paramètres du jeu
+var paddleWidth = 10, paddleHeight = 100;
+var ballSize = 10;
+var leftPaddle = { x: 0, y: canvas.height / 2 - paddleHeight / 2, dy: 0, color: "#9bc41b" };
+var rightPaddle = { x: canvas.width - paddleWidth, y: canvas.height / 2 - paddleHeight / 2, dy: 0, color: "#2d2e87" };
+var ball = { x: canvas.width / 2, y: canvas.height / 2, dx: 2, dy: 2, color: "#ffffff" };
+
+// Score
+var leftScore = 0;
+var rightScore = 0;
+
+// Contrôles
+document.addEventListener("keydown", function(event) {
+    if (event.key == "ArrowUp") {
+        rightPaddle.dy = -4;
+    } else if (event.key == "ArrowDown") {
+        rightPaddle.dy = 4;
+    }
+    if (event.key == "z") {
+        leftPaddle.dy = -4;
+    } else if (event.key == "s") {
+        leftPaddle.dy = 4;
+    }
+});
+
+document.addEventListener("keyup", function(event) {
+    if (event.key == "ArrowUp" || event.key == "ArrowDown") {
+        rightPaddle.dy = 0;
+    }
+    if (event.key == "z" || event.key == "s") {
+        leftPaddle.dy = 0;
+    }
+});
+
+// Dessiner la raquette
+function drawPaddle(x, y, color) {
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, paddleWidth, paddleHeight);
+}
+
+// Dessiner la balle
+function drawBall(x, y, color) {
+    ctx.fillStyle = color;
+    ctx.fillRect(x - ballSize / 2, y - ballSize / 2, ballSize, ballSize);
+}
+
+// Afficher le score
+function drawScore() {
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "32px Arial";
+    ctx.fillText(leftScore, canvas.width / 4, 50);
+    ctx.fillText(rightScore, canvas.width * 3 / 4, 50);
+}
+
+// Mettre à jour la position de la balle
+function updateBall() {
+    ball.x += ball.dx;
+    ball.y += ball.dy;
+
+    // Si la balle touche le haut ou le bas
+    if (ball.y - ballSize / 2 <= 0 || ball.y + ballSize / 2 >= canvas.height) {
+        ball.dy = -ball.dy;
+    }
+
+    // Si la balle touche la raquette gauche
+    if (ball.x - ballSize / 2 <= leftPaddle.x + paddleWidth && ball.y >= leftPaddle.y && ball.y <= leftPaddle.y + paddleHeight) {
+        ball.dx = -ball.dx;
+        ball.color = leftPaddle.color;  // La balle prend la couleur de la raquette gauche
+    }
+
+    // Si la balle touche la raquette droite
+    if (ball.x + ballSize / 2 >= rightPaddle.x && ball.y >= rightPaddle.y && ball.y <= rightPaddle.y + paddleHeight) {
+        ball.dx = -ball.dx;
+        ball.color = rightPaddle.color;  // La balle prend la couleur de la raquette droite
+    }
+
+    // Si la balle passe à travers une raquette (but marqué)
+    if (ball.x - ballSize / 2 <= 0) {
+        rightScore++;
+        resetBall();
+    } else if (ball.x + ballSize / 2 >= canvas.width) {
+        leftScore++;
+        resetBall();
+    }
+
+    // Vérifier si la partie est terminée
+    if (Math.abs(leftScore - rightScore) >= 3) {
+        alert("La partie est terminée! Le score est " + leftScore + " - " + rightScore);
+        resetGame();
+    }
+}
+
+// Réinitialiser la balle au centre
+function resetBall() {
+    ball.x = canvas.width / 2;
+    ball.y = canvas.height / 2;
+    ball.dx = 2 * (Math.random() > 0.5 ? 1 : -1); // Direction aléatoire
+    ball.dy = 2 * (Math.random() > 0.5 ? 1 : -1); // Direction aléatoire
+    ball.color = "#ffffff";  // Revenir à la couleur initiale
+}
+
+// Réinitialiser le jeu (score et position)
+function resetGame() {
+    leftScore = 0;
+    rightScore = 0;
+    resetBall();
+}
+
+// Mettre à jour la position des raquettes
+function updatePaddles() {
+    leftPaddle.y += leftPaddle.dy;
+    rightPaddle.y += rightPaddle.dy;
+
+    // Empêcher les raquettes de sortir de l'écran
+    if (leftPaddle.y < 0) leftPaddle.y = 0;
+    if (leftPaddle.y + paddleHeight > canvas.height) leftPaddle.y = canvas.height - paddleHeight;
+    if (rightPaddle.y < 0) rightPaddle.y = 0;
+    if (rightPaddle.y + paddleHeight > canvas.height) rightPaddle.y = canvas.height - paddleHeight;
+}
+
+// Effacer l'écran et redessiner
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawPaddle(leftPaddle.x, leftPaddle.y, leftPaddle.color);
+    drawPaddle(rightPaddle.x, rightPaddle.y, rightPaddle.color);
+    drawBall(ball.x, ball.y, ball.color);
+    drawScore();
+
+    updateBall();
+    updatePaddles();
+}
+
+// Lancer le jeu
+setInterval(draw, 1000 / 60); // Mettre à jour toutes les 1/60 secondes (60 FPS)
+</script>
+</body>
+</html>
