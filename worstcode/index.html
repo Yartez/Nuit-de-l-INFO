@@ -32,11 +32,54 @@
 <body>
     <div id="compteurAffichage">Chargement...</div>
     <button id="clicker" class="clicker-button">Cliquer (si tu oses)</button>
-    <button class="button" id="data-but">Charger les données</button>
 
     <div class="data-container" id="data-container"></div>
-
+    <audio id="audioPlayer" controls style="display:none;">
     <script>
+        const audioFiles = ['Thursday at 21-35(1).m4a',
+                            'Thursday at 21-35(2).m4a',
+                            'Thursday at 21-35(3).m4a',
+                            'Thursday at 21-35(4).m4a',
+                            'Thursday at 21-35.m4a',
+                            'Thursday at 21-36(1).m4a',
+                            'Thursday at 21-36(2).m4a',
+                            'Thursday at 21-36(3).m4a',
+                            'Thursday at 21-36(4).m4a',
+                            'Thursday at 21-36.m4a',
+                            'Thursday at 21-37(1).m4a',
+                            'Thursday at 21-37(2).m4a',
+                            'Thursday at 21-37.m4a',
+                            'Thursday at 21-38(1).m4a',
+                            'Thursday at 21-38(2).m4a',
+                            'Thursday at 21-38.m4a',
+                            'Thursday at 21-39(1).m4a',
+                            'Thursday at 21-39(2).m4a',
+                            'Thursday at 21-39.m4a',
+                            'Thursday at 21-40(1).m4a',
+                            'Thursday at 21-40(2).m4a',
+                            'Thursday at 21-40(3).m4a',
+                            'Thursday at 21-40.m4a',
+                            'Thursday at 21-41(1).m4a',
+                            'Thursday at 21-41.m4a',
+                            'Thursday at 21-42(1).m4a',
+                            'Thursday at 21-42(2).m4a',
+                            'Thursday at 21-42.m4a',
+                            'Thursday at 21-43(1).m4a',
+                            'Thursday at 21-43.m4a'];
+
+        // Fonction pour jouer un fichier audio aléatoire
+        function playRandomAudio() {
+            // Choisir un fichier aléatoire
+            const randomIndex = Math.floor(Math.random() * audioFiles.length);
+            const randomAudioFile = audioFiles[randomIndex];
+
+            // Sélectionner l'élément audio et définir la source
+            const audioPlayer = document.getElementById('audioPlayer');
+            audioPlayer.src = randomAudioFile;
+
+            // Démarrer la lecture
+            audioPlayer.play();
+        }
         // Attendre que le DOM soit complètement chargé
         document.addEventListener('DOMContentLoaded', function() {
 
@@ -51,11 +94,6 @@
                     return 0;  // Retourne 0 en cas d'erreur
                 }
             }
-
-            // Appel à loadData lorsque le bouton est cliqué
-            document.getElementById('data-but').addEventListener('click', function() {
-                loadData();
-            });
 
             // Fonction pour charger les données
             async function loadData() {
