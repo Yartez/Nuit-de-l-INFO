@@ -18,50 +18,24 @@
         #compteurAffichage {
             font-size: 64px;
         }
+        .data-container {
+            margin-top: 20px;
+        }
+        .data-box {
+            background-color: #32CD32;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
     <div id="compteurAffichage">Chargement...</div>
     <button id="clicker" class="clicker-button">Cliquer (si tu oses)</button>
     <div id="historiqueAffichage">Historique des 5 derniers clics :</div>
-    <h1>Affichage Chaotique des Données de Session</h1>
-    <button class="button" onclick="loadData()">Charger les données</button>
 
     <div class="data-container" id="data-container"></div>
 
-    <script>
-        function loadData() {
-            let rang = 0;  // Ligne initiale
-            let colonnes = ['id', 'session_id', 'ip_address', 'user_agent', 'ancien_compteur', 'nouveau_compteur', 'update_time'];  // Noms des colonnes
-            let totalRows = 5;  // Nombre de lignes à récupérer (à ajuster en fonction de ta base de données)
-            
-            // Charger les données ligne par ligne, puis champ par champ
-            for (let i = 0; i < totalRows; i++) {
-                colonnes.forEach((colonne, index) => {
-                    setTimeout(() => {
-                        fetch(`get_field.php?rang=${i}&colonne=${colonne}`)
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.value) {
-                                    addDataToPage(i, colonne, data.value);
-                                } else {
-                                    console.error(`Erreur pour ligne ${i}, colonne ${colonne}: ${data.error}`);
-                                }
-                            })
-                            .catch(error => console.error('Erreur AJAX:', error));
-                    }, Math.random() * 1000); // Temps aléatoire pour un affichage chaotique
-                });
-            }
-        }
-
-        function addDataToPage(rowIndex, columnName, value) {
-            let container = document.getElementById('data-container');
-            let dataBox = document.createElement('div');
-            dataBox.classList.add('data-box');
-            dataBox.innerHTML = `<strong>Row ${rowIndex + 1} - ${columnName}:</strong> ${value}`;
-            container.appendChild(dataBox);
-        }
-    </script>
     <script>
         function fetchCompteur() {
             fetch('get_compteur.php')
@@ -76,7 +50,8 @@
                     });
                     historiqueHTML += '</ul>';
                     document.getElementById('historiqueAffichage').innerHTML = historiqueHTML;
-                });
+                })
+                .catch(error => console.error('Erreur:', error));
         }
 
         function incrementCompteur() {
@@ -85,7 +60,8 @@
                 .then(data => {
                     console.log("Compteur mis à jour : " + data);
                     fetchCompteur(); // Rafraîchir l'affichage après incrémentation
-                });
+                })
+                .catch(error => console.error('Erreur:', error));
         }
 
         document.getElementById('clicker').addEventListener('click', function() {

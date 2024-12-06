@@ -13,53 +13,38 @@ if ($conn->connect_error) {
     die("Connexion échouée : " . $conn->connect_error);
 }
 
-// Générer un ID de session s'il n'existe pas
+// Vérifier l'existence de la session
 if (!isset($_SESSION['session_id'])) {
-    $_SESSION['session_id'] = bin2hex(random_bytes(16));
+    die("Session non trouvée !");
 }
 
 $session_id = $_SESSION['session_id'];
-$ip_address = $_SERVER['REMOTE_ADDR'];  // Adresse IP de l'utilisateur
-$user_agent = $_SERVER['HTTP_USER_AGENT'];  // User-agent de l'utilisateur
 
-// Vérifier si la session existe dans la base
-$sql = "SELECT compteur FROM sessions WHERE session_id = '$session_id'";
-$result = $conn->query($sql);
+// Récupérer le compteur actuel
+$sql_get_compteur = "SELECT compteur FROM sessions WHERE session_id = '$session_id'";
+$result_compteur = $conn->query($sql_get_compteur);
 
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $compteur = $row['compteur'];
-
-    // Mettre à jour l'IP et le user-agent à chaque accès
-    $update_sql = "UPDATE sessions 
-                   SET ip_address = '$ip_address', user_agent = '$user_agent', last_access_time = CURRENT_TIMESTAMP 
-                   WHERE session_id = '$session_id'";
-    $conn->query($update_sql);
+if ($result_compteur->num_rows > 0) {
+    $row_compteur = $result_compteur->fetch_assoc();
+    $compteur = $row_compteur['compteur'];
 } else {
-    // Si la session n'existe pas, l'ajouter avec compteur à 0
-    $compteur = 0;
-    $insert_sql = "INSERT INTO sessions (session_id, compteur, ip_address, user_agent) 
-                   VALUES ('$session_id', $compteur, '$ip_address', '$user_agent')";
-    $conn->query($insert_sql);
+    $compteur = 0;  // Si la session n'est pas trouvée, compteur à 0
 }
 
 // Récupérer l'historique des 5 derniers clics
-$sql_historique = "SELECT ancien_compteur, nouveau_compteur, update_time 
-                   FROM sessionhistoire 
-                   WHERE session_id = '$session_id' 
-                   ORDER BY update_time DESC 
-                   LIMIT 5";
-$historique_result = $conn->query($sql_historique);
-
+$sql_historique = "SELECT * FROM sessionhistoire ORDER BY update_time DESC LIMIT 5";
+$result_historique = $conn->query($sql_historique);
 $historique = [];
-if ($historique_result->num_rows > 0) {
-    while ($row = $historique_result->fetch_assoc()) {
-        $historique[] = $row;
-    }
+
+while ($row = $result_historique->fetch_assoc()) {
+    $historique[] = $row;
 }
 
-$conn->close();
+// Renvoi des données sous forme de JSON
+echo json_encode([
+    'compteur' => $compteur,
+    'historique' => $historique
+]);
 
-// Retourner le compteur et l'historique en JSON
-echo json_encode(['compteur' => $compteur, 'historique' => $historique]);
+$conn->close();
 ?>
