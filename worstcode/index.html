@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coffu' Klique</title>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            let score = 0;
-            let scoreElement = document.getElementById("score");
-            setInterval(() => {
-                score++;
-                scoreElement.innerHTML = score; 
-            }, 1000);
-        });
+        let score = 0;
+        let scoreElement = document.getElementById("score");
+        setInterval(() => {
+            score++;
+            scoreElement.innerHTML = score; 
+        }, 1000);
     </script>
 </head>
 <body style="overflow: hidden;">
@@ -43,7 +41,7 @@
             </div>
         </div>
     <div style="display: grid; place-content: center;">
-        <a id="clicker" onclick="incrementCompteur()" style="cursor: pointer;"><img src="Images\Sans titre-3.jpg" alt="" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); transition: all 0.3s;"></a>
+        <button id="clicker"><img src="Images\Sans titre-3.jpg" alt="" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); transition: all 0.3s;"></button>
         <h1>TFRGHRTSHSTGDRHDRTHEDRTYHDTYHDGFCJDT</h1>
     </div>
     <div style="position: fixed; top: 59%;">
