@@ -57,7 +57,7 @@ lyreco_div.onclick = triggerAnnimation;
 let lyreco_imageNumber = Math.floor(Math.random() * (22 + 1));
 // Crée l'élément img
 const lyreco_img = document.createElement('img');
-lyreco_img.src = 'assets/'+lyreco_imageNumber+'.png';
+lyreco_img.src = 'http://nuitinfo.cyclonicforce.fr/raceforwater/assets/lyreco/'+lyreco_imageNumber+'.png';
 lyreco_img.alt = "Lyreco"
 
 lyreco_img.style.position = "absolute";
@@ -166,7 +166,7 @@ function addSweating() {
     const element = document.getElementById('Lyreco_element');
     element.style.opacity = 0.75;
     const img2 = document.createElement('img');
-    img2.src = 'assets/sweating.png';
+    img2.src = 'http://nuitinfo.cyclonicforce.fr/raceforwater/assets/lyreco/sweating.png';
     img2.alt = 'Sweating';
 
     img2.height = lyreco_img.height / 1.5;
@@ -206,7 +206,7 @@ function fleeMouse(event) {
 cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
     lyreco_stop = true;
     addSweating();
-  });
+});
 
 document.addEventListener('mousemove', fleeMouse);
 
