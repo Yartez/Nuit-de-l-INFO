@@ -19,7 +19,7 @@ if (!isset($_SESSION['session_id'])) {
 }
 
 $session_id = $_SESSION['session_id'];
-$ip_address = $_SERVER['Forwarded'];  // Adresse IP de l'utilisateur
+$ip_address = $_SERVER['X-Forwarded-For'];  // Adresse IP de l'utilisateur
 $user_agent = $_SERVER['HTTP_USER_AGENT'];  // User-agent de l'utilisateur
 
 // Récupérer l'ancien compteur avant mise à jour
@@ -33,7 +33,7 @@ if ($result->num_rows > 0) {
 }
 
 // Incrémenter le compteur et mettre à jour les champs
-$ip = $_SERVER['Forwarded'];
+$ip = $_SERVER['X-Forwarded-For'];
 $sql_update = "UPDATE sessions 
         SET compteur = compteur + 1, 
             ip_address = '$ip', 
@@ -45,7 +45,7 @@ if ($conn->query($sql_update) === TRUE) {
     $nouveau_compteur = $ancien_compteur + 1;
 
     // Insérer dans l'historique
-    $ip = $_SERVER['Forwarded'];
+    $ip = $_SERVER['X-Forwarded-For'];
     $sql_historique = "INSERT INTO sessionhistoire (session_id, ip_address, user_agent, ancien_compteur, nouveau_compteur, update_time)
                        VALUES ('$session_id', '$ip', '$user_agent', $ancien_compteur, $nouveau_compteur, CURRENT_TIMESTAMP)";
     
