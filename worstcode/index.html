@@ -11,20 +11,67 @@
             score++;
             scoreElement.innerHTML = score; 
         }, 1000);
+
+        // Fonction pour jouer un fichier audio aléatoire
+        function playRandomAudio() {
+            const audioFiles = ['Thursday at 21-35(1).m4a',
+                'Thursday at 21-35(2).m4a',
+                'Thursday at 21-35(3).m4a',
+                'Thursday at 21-35(4).m4a',
+                'Thursday at 21-35.m4a'];
+            const randomIndex = Math.floor(Math.random() * audioFiles.length);
+            const randomAudioFile = audioFiles[randomIndex];
+            const audioPlayer = document.getElementById('audioPlayer');
+            audioPlayer.src = randomAudioFile;
+            audioPlayer.play();
+        }
+
+        // Fonction pour récupérer et afficher le compteur
+        function fetchCompteur() {
+            const compteurAffichage = document.getElementById('compteurAffichage');
+            if (compteurAffichage) {  // Vérifier si l'élément existe
+                fetch('get_compteur.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        compteurAffichage.innerHTML = `<marquee>Compteur : ${data.compteur}</marquee>`;
+                    })
+                    .catch(error => console.error('Erreur:', error));
+            } else {
+                console.error('Élément #compteurAffichage introuvable.');
+            }
+        }
+
+        // Fonction pour incrémenter le compteur
+        function incrementCompteur() {
+            playRandomAudio();
+            fetch('update_compteur.php')
+                .then(response => response.text())
+                .then(data => {
+                    console.log("Compteur mis à jour : " + data);
+                    fetchCompteur(); // Rafraîchir l'affichage après incrémentation
+                })
+                .catch(error => console.error('Erreur:', error));
+        }
+
+        // Lorsque le DOM est complètement chargé
+        document.addEventListener('DOMContentLoaded', function() {
+            // Attacher l'événement au clic de l'image
+            const clicker = document.getElementById('clicker');
+            clicker.addEventListener('click', function(e) {
+                e.preventDefault();  // Empêcher le comportement par défaut du lien
+                incrementCompteur(); // Appeler la fonction pour incrémenter le compteur
+            });
+
+            // Charger le compteur au démarrage
+            fetchCompteur();
+        });
     </script>
 </head>
 <body style="overflow: hidden;">
     <div>
         <section style="position: absolute; height: 110%; width: 34%; background-color: black; top: -25px; left:-10px;"></section>
-            <h2>Section 1</h2>
-            <p>This is the first section.</p>
-        </section>
-        <section style="position: absolute; height: 110%; width: 34%; background-color: rgb(251, 255, 0); top: -25px; left: 33%;">
-
-        </section>
-        <section style="position: absolute; height: 110%; width: 34%; background-color: rgb(255, 0, 0); top: -25px; left: 66%;">
-
-        </section>
+        <section style="position: absolute; height: 110%; width: 34%; background-color: rgb(251, 255, 0); top: -25px; left: 33%;"></section>
+        <section style="position: absolute; height: 110%; width: 34%; background-color: rgb(255, 0, 0); top: -25px; left: 66%;"></section>
         <div class="irail" style="position: absolute; display: flex; height: 140px; top: 90%; left: -10px;">
             <img src="Images\Plan de travail 1.png" alt=""> <!--Aboule-->
         </div>
@@ -35,60 +82,53 @@
             <p>Blahaj forever</p>
             <div style="position: absolute;transform: rotate(-40deg); background-color: rgb(94, 255, 1); padding: 10px; position: absolute; top: 300px; left: 10px; width: 150px; height: 40px;">
                 <h1>Score :</h1>
-                <span id="compteurAffichage">
-<!--il faut saucissoner le tableau-->
-                </span>
+                <span id="compteurAffichage"></span>
             </div>
         </div>
-    <div style="display: grid; place-content: center;">
-        <a id="clicker">
-            <img src="Images\Sans titre-3.jpg" alt="" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); transition: all 0.3s;">
-        </a>        
-        <h1>TFRGHRTSHSTGDRHDRTHEDRTYHDTYHDGFCJDT</h1>
-    </div>
-    <div style="position: fixed; top: 59%;">
-        <img class="itrain" src="Images\bbadf58d-a712-458b-bcbc-aee02366e537_rw_3840.png" alt="">
-    </div>
-    <div">
-        <div>
-            <img class="proto" src="Images\Ripoint_Henri_BOYKISSERmeme.png" alt="" style="position: absolute; width: 30%; bottom:-20%; cursor: pointer; transform: translateY(0%);" onclick="zoomImage()">
+        <div style="display: grid; place-content: center;">
+            <a id="clicker">
+                <img src="Images\Sans titre-3.jpg" alt="" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); transition: all 0.3s;">
+            </a>        
+            <h1>TFRGHRTSHSTGDRHDRTHEDRTYHDTYHDGFCJDT</h1>
         </div>
-
-        <script>
-            function zoomImage() {
-                const image = document.querySelector(".proto"); // mon petit sigma
-                image.style.transform = "scale(3)";
-                image.style.bottom = "40%";
-                image.style.left = "35%";
-                image.style.transition = "transform 0.1s";
-            }
-        </script>
+        <div style="position: fixed; top: 59%;">
+            <img class="itrain" src="Images\bbadf58d-a712-458b-bcbc-aee02366e537_rw_3840.png" alt="">
+        </div>
+        <div>
+            <div>
+                <img class="proto" src="Images\Ripoint_Henri_BOYKISSERmeme.png" alt="" style="position: absolute; width: 30%; bottom:-20%; cursor: pointer; transform: translateY(0%);" onclick="zoomImage()">
+            </div>
+            <script>
+                function zoomImage() {
+                    const image = document.querySelector(".proto");
+                    image.style.transform = "scale(3)";
+                    image.style.bottom = "40%";
+                    image.style.left = "35%";
+                    image.style.transition = "transform 0.1s";
+                }
+            </script>
+        </div>
     </div>
-    </div>
-
-
-    <div class="advanced-controls"  style="z-index: 1000; position: relative;">
+    <div class="advanced-controls" style="z-index: 1000; position: relative;">
         <input id="angleSlider" type="range" min="-180" max="180" step="0.02" value="0">
         <output id="angleDisplay">0°</output>
-      </div>
-
-        <script>
-            const angleSlider = document.getElementById("angleSlider");
-            const angleDisplay = document.getElementById("angleDisplay");
-            const img = document.querySelector(".itrain");
-            const img2 = document.querySelector(".irail");
-            angleSlider.addEventListener("input", () => {
+    </div>
+    <script>
+        const angleSlider = document.getElementById("angleSlider");
+        const angleDisplay = document.getElementById("angleDisplay");
+        const img = document.querySelector(".itrain");
+        const img2 = document.querySelector(".irail");
+        angleSlider.addEventListener("input", () => {
             const angle = angleSlider.value;
             angleDisplay.textContent = `${angle}°`;
             img.style.transform = `rotate(${angle}deg)`;
             img2.style.transform = `rotate(${angle}deg)`;
-            });
-        </script>
-      
+        });
+    </script>
     <div style="display: grid; place-content: center;">
         <script>
             function getRandomImage() {
-                const images = ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png","10.png","11.png","12.png","13.png","14.png","15.png","16.png","17.png","18.png","19.png","20.png","21.png","22.png",]; // Add your image filenames here
+                const images = ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png","10.png","11.png","12.png","13.png","14.png","15.png","16.png","17.png","18.png","19.png","20.png","21.png","22.png"];
                 const randomIndex = Math.floor(Math.random() * images.length);
                 const randomImage = images[randomIndex];
                 return randomImage;
@@ -110,150 +150,8 @@
             container.appendChild(imageElement);
         </script>
     </div>
-
-<di<v>
+    <div>
         <img src="Images\maxwell-pat-pat.gif" alt="Maxwell's demon animation" style="position:absolute; width: 300px; height: auto; right: 0px; bottom:0; z-index: 999999999999999999999;">
     </div>
-    
-
-    <script>
-        const audioFiles = ['Thursday at 21-35(1).m4a',
-                            'Thursday at 21-35(2).m4a',
-                            'Thursday at 21-35(3).m4a',
-                            'Thursday at 21-35(4).m4a',
-                            'Thursday at 21-35.m4a',
-                            'Thursday at 21-36(1).m4a',
-                            'Thursday at 21-36(2).m4a',
-                            'Thursday at 21-36(3).m4a',
-                            'Thursday at 21-36(4).m4a',
-                            'Thursday at 21-36.m4a',
-                            'Thursday at 21-37(1).m4a',
-                            'Thursday at 21-37(2).m4a',
-                            'Thursday at 21-37.m4a',
-                            'Thursday at 21-38(1).m4a',
-                            'Thursday at 21-38(2).m4a',
-                            'Thursday at 21-38.m4a',
-                            'Thursday at 21-39(1).m4a',
-                            'Thursday at 21-39(2).m4a',
-                            'Thursday at 21-39.m4a',
-                            'Thursday at 21-40(1).m4a',
-                            'Thursday at 21-40(2).m4a',
-                            'Thursday at 21-40(3).m4a',
-                            'Thursday at 21-40.m4a',
-                            'Thursday at 21-41(1).m4a',
-                            'Thursday at 21-41.m4a',
-                            'Thursday at 21-42(1).m4a',
-                            'Thursday at 21-42(2).m4a',
-                            'Thursday at 21-42.m4a',
-                            'Thursday at 21-43(1).m4a',
-                            'Thursday at 21-43.m4a'];
-
-        // Fonction pour jouer un fichier audio aléatoire
-        function playRandomAudio() {
-            // Choisir un fichier aléatoire
-            const randomIndex = Math.floor(Math.random() * audioFiles.length);
-            const randomAudioFile = audioFiles[randomIndex];
-
-            // Sélectionner l'élément audio et définir la source
-            const audioPlayer = document.getElementById('audioPlayer');
-            audioPlayer.src = randomAudioFile;
-
-            // Démarrer la lecture
-            audioPlayer.play();
-        }
-        // Attendre que le DOM soit complètement chargé
-        document.addEventListener('DOMContentLoaded', function() {
-
-            // Fonction asynchrone pour récupérer le nombre de lignes
-            async function fetchRowCount() {
-                try {
-                    const response = await fetch('get_row_count.php');
-                    const data = await response.json();
-                    return data.total_rows;  // Retourne le nombre total de lignes
-                } catch (error) {
-                    console.error('Erreur AJAX:', error);
-                    return 0;  // Retourne 0 en cas d'erreur
-                }
-            }
-
-            // Fonction pour charger les données
-            async function loadData() {
-                // Attendre que le nombre de lignes soit récupéré
-                const totalRows = await fetchRowCount();
-                console.log(`Total rows: ${totalRows}`);  // Affiche le nombre de lignes dans la console
-
-                let colonnes = ['id', 'session_id', 'ip_address', 'user_agent', 'ancien_compteur', 'nouveau_compteur', 'update_time'];  // Noms des colonnes
-                
-                // Charger les données ligne par ligne, puis champ par champ
-                for (let i = 0; i < totalRows; i++) {
-                    colonnes.forEach((colonne, index) => {
-                        setTimeout(() => {
-                            fetch(`get_field.php?rang=${i}&colonne=${colonne}`)
-                                .then(response => response.json())
-                                .then(data => {
-                                    if (data.value) {
-                                        addDataToPage(i, colonne, data.value);
-                                    } else {
-                                        console.error(`Erreur pour ligne ${i}, colonne ${colonne}: ${data.error}`);
-                                    }
-                                })
-                                .catch(error => console.error('Erreur AJAX:', error));
-                        }, Math.random() * 1000); // Temps aléatoire pour un affichage chaotique
-                    });
-                }
-            }
-
-            // Fonction pour ajouter les données sur la page
-            function addDataToPage(rowIndex, columnName, value) {
-                let container = document.getElementById('data-container');
-                let dataBox = document.createElement('div');
-                dataBox.classList.add('data-box');
-                dataBox.innerHTML = `<strong>Row ${rowIndex + 1} - ${columnName}:</strong> ${value}`;
-                container.appendChild(dataBox);
-            }
-
-            // Fonction pour récupérer et afficher le compteur
-            function fetchCompteur() {
-                const compteurAffichage = document.getElementById('compteurAffichage');
-                if (compteurAffichage) {  // Vérifier si l'élément existe
-                    fetch('get_compteur.php')
-                        .then(response => response.json())
-                        .then(data => {
-                            compteurAffichage.innerHTML = `<marquee>Compteur : ${data.compteur}</marquee>`;
-
-                            // Afficher l'historique
-                            let historiqueHTML = '<ul>';
-                            data.historique.forEach(function(entry) {
-                                historiqueHTML += `<li>${entry.ancien_compteur} ➡️ ${entry.nouveau_compteur} à ${entry.update_time}</li>`;
-                            });
-                            historiqueHTML += '</ul>';
-                        })
-                        .catch(error => console.error('Erreur:', error));
-                } else {
-                    console.error('Élément #compteurAffichage introuvable.');
-                }
-            }
-
-            // Fonction pour incrémenter le compteur
-            function incrementCompteur() {
-                playRandomAudio();
-                fetch('update_compteur.php')
-                    .then(response => response.text())
-                    .then(data => {
-                        console.log("Compteur mis à jour : " + data);
-                        fetchCompteur(); // Rafraîchir l'affichage après incrémentation
-                    })
-                    .catch(error => console.error('Erreur:', error));
-            }
-
-            document.getElementById('clicker').addEventListener('click', function(e) {
-                e.preventDefault(); // Empêcher le comportement par défaut du lien
-                incrementCompteur();
-            });
-
-            // Charger le compteur au démarrage
-            fetchCompteur();
-        });
-    </script>
 </body>
-</html></div>
+</html>
