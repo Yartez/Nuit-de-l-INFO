@@ -44,8 +44,9 @@ if ($conn->query($sql_update) === TRUE) {
     $nouveau_compteur = $ancien_compteur + 1;
 
     // Insérer dans l'historique
+    $ip = $_SERVER['REMOTE_ADDR'];
     $sql_historique = "INSERT INTO sessionhistoire (session_id, ip_address, user_agent, ancien_compteur, nouveau_compteur, update_time)
-                       VALUES ('$session_id', '$ip_address', '$user_agent', $ancien_compteur, $nouveau_compteur, CURRENT_TIMESTAMP)";
+                       VALUES ('$session_id', '$ip', '$user_agent', $ancien_compteur, $nouveau_compteur, CURRENT_TIMESTAMP)";
     
     if ($conn->query($sql_historique) === TRUE) {
         echo "Compteur mis à jour et historique enregistré.";
