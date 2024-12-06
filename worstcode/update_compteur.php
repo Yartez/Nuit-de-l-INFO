@@ -33,9 +33,10 @@ if ($result->num_rows > 0) {
 }
 
 // Incrémenter le compteur et mettre à jour les champs
+$ip = $_SERVER['REMOTE_ADDR'];
 $sql_update = "UPDATE sessions 
         SET compteur = compteur + 1, 
-            ip_address = '$ip_address', 
+            ip_address = '$ip', 
             user_agent = '$user_agent', 
             update_time = CURRENT_TIMESTAMP 
         WHERE session_id = '$session_id'";
