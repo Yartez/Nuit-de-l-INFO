@@ -23,13 +23,20 @@ const lyreco_min = 50;
 const lyreco_max = 150;
 const lyreco_div = document.createElement('div');
 
-const animations = {"0":"draw", "1":"draw", "2":"explosion", "8":"casse brick.html", "14":"casse brick.html", "15":"snake.html", "16":"snake.html","19":"tetris"};
+const animations = {"0":"draw", "1":"draw", "2":"explosion", "3":"rainbow", "8":"casse brick.html", "14":"casse brick.html", "15":"snake.html", "16":"snake.html","19":"tetris"};
 
-function getValue(dict, key, defaultValue) {
+function getRandomValue(dict) {
+    const keys = Object.keys(dict); // Get an array of the dictionary's keys
+    const randomIndex = Math.floor(Math.random() * keys.length); // Get a random index
+    const randomKey = keys[randomIndex]; // Get the random key
+    return dict[randomKey]; // Return the value corresponding to the random key
+}
+
+function getValue(dict, key) {
     if (key in dict) {
         return dict[key];
     } else {
-        return defaultValue;
+        return getRandomValue(dict);
     }
 }
 
@@ -127,7 +134,7 @@ function triggerAnnimation() {
     element.style.left = '0px';
     element.style.opacity = 0.99;
 
-    triggerModal(getValue(animations, lyreco_imageNumber, "tetris"));
+    triggerModal(getValue(animations, lyreco_imageNumber));
     lyreco_img.style.display = "none";
 }
 
