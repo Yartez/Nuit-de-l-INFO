@@ -7,17 +7,9 @@
     <style>
         body {
             font-family: 'Comic Sans MS', sans-serif;
-            background-color: #FF6347; /* Couleur de fond qui tue les yeux */
+            background-color: #FF6347;
             color: white;
             text-align: center;
-        }
-        h1 {
-            font-size: 3em;
-            text-decoration: underline;
-        }
-        h2 {
-            font-size: 2em;
-            color: #FFD700; /* Jaune dégueulasse */
         }
         .data-container {
             display: flex;
@@ -49,29 +41,56 @@
         .button:hover {
             background-color: #ff69b4;
         }
-        .alert {
-            color: #ffcc00;
-            font-size: 1.2em;
-            text-shadow: 2px 2px 5px red;
-        }
     </style>
 </head>
 <body>
 
     <h1>Bienvenue dans l'Exploration Chaotique des Données</h1>
-    <p class="alert">ATTENTION : Ceci est une expérience dangereuse pour la base de données !</p>
+    <p class="alert">ATTENTION : Chaque champ est récupéré dynamiquement et de façon chaotique.</p>
 
-    <h2>Tables et Champs explorés :</h2>
-
-    <div class="data-container">
-        <!-- Les données seront affichées ici par PHP -->
+    <div class="data-container" id="data-container">
+        <!-- Les données seront affichées ici par JS -->
     </div>
 
-    <button class="button" onclick="alert('Nouveau champ ? Impossible...')">Clique ici pour tenter de trouver une donnée cachée</button>
+    <button class="button" onclick="loadData()">Cliquez pour charger les données !</button>
 
     <footer>
         <p>&copy; 2024 La folie des données</p>
     </footer>
+
+    <script>
+        function loadData() {
+            let table = 'nom_de_table'; // Remplace avec le nom de la table que tu veux explorer
+            let totalRows = 5; // Le nombre de lignes à récupérer
+            let columns = ['colonne1', 'colonne2', 'colonne3']; // Liste des colonnes de la table
+
+            let currentRow = 0;
+
+            // Appels AJAX pour chaque champ dans chaque ligne
+            columns.forEach(function(column) {
+                for (let row = 0; row < totalRows; row++) {
+                    // Effectuer un appel AJAX pour récupérer la valeur d'une colonne spécifique d'une ligne
+                    fetch(`update_compteur.php?table=${table}&column=${column}&row=${row}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.value) {
+                                addDataToPage(data);
+                            }
+                        })
+                        .catch(error => console.error('Erreur AJAX :', error));
+                }
+            });
+        }
+
+        function addDataToPage(data) {
+            // Créer une nouvelle "box" pour afficher la donnée
+            let container = document.getElementById('data-container');
+            let dataBox = document.createElement('div');
+            dataBox.classList.add('data-box');
+            dataBox.innerHTML = `<strong>${data.column}</strong>: ${data.value}`;
+            container.appendChild(dataBox);
+        }
+    </script>
 
 </body>
 </html>
