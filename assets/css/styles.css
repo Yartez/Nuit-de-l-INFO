@@ -1,0 +1,176 @@
+:root {
+    --black-color: #000;
+    --white-color: #fff;
+    --light-color: #f1f1f1;
+    --primary-color: #0063a8;
+    --secondary-color: #61b3e3;
+    --darken-color: #162751;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+    height: 100vh;  
+}
+.home-background {
+    z-index: -100;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(/assets/img/deep-ocean-irina-iriser.png);
+    background-color: var(--darken-color);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.5);    
+}
+img {
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.scroll-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+.human-body {
+    position: fixed;
+    width: 80vw;
+    margin: 0 auto;
+    transition: transform 0.5s ease-in-out;
+}
+
+.human-body img {
+    width: 100%;
+    height: 100vh;
+    object-fit: contain;
+    transition: transform 0.3s ease-in-out;
+}
+
+
+/* Items de contenu */
+.scroll-content {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(6 * 100vh); /* 6 sections * 100vh */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* scroll-item */
+.section-item {
+    z-index: -10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+.section-item.active {
+    opacity: 1;
+}
+
+.scroll-item {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 250px;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    color: var(--white-color);
+    border-bottom: .3rem solid var(--secondary-color);
+    transition: transform 0.5s ease-in-out;
+}
+
+.scroll-item .item-content {
+    position: relative;
+    z-index: 1;
+    width: 95%;
+    height: 100%;
+    padding: 10px;
+}
+
+.scroll-item h3 {
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+}
+.scroll-item h3::first-letter {
+    font-size: 2em;
+    color: var(--secondary-color);
+    line-height: 1;
+    font-family: 'Georgia', serif;
+}
+
+.scroll-item p {
+    font-size: 1rem;
+    color: var(--light-color);
+}
+.scroll-item .item-img {
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: brightness(0.6);
+}
+.scroll-item .item-img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Position des items */
+.section-item:nth-child(2n) .scroll-item {
+    top: calc(50% - 125px);
+    left: calc(80% - 200px);
+}
+.section-item:nth-child(2n + 1) .scroll-item {
+    top: calc(50% - 125px);
+    left: 10%;
+}
+
+/* Position des items */
+.section-item[data-target="home"] {
+    top: 0vh;
+}
+
+.section-item[data-target="coeur"] {
+    top: 100vh;
+}
+
+.section-item[data-target="poumons"] {
+    top: 200vh;
+}
+
+.section-item[data-target="cerveau"] {
+    top: 300vh;
+}
+
+.section-item[data-target="veines"] {
+    top: 400vh;
+}
+
+.section-item[data-target="peau"] {
+    top: 500vh;
+}

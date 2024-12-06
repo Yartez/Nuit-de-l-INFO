@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human Body Zoom</title>
+    <link rel="stylesheet" type="text/css" media="all" href="/assets/css/styles.css">
+    <link rel="stylesheet" type="text/css" media="all" href="/assets/css/player.css">
+    <script src="/assets/js/script.js"></script>
+    <script src="/assets/js/player.js"></script>
+</head>
+<body>
+    <div class="scroll-container">
+        <div class="human-body">
+            <img src="/assets/img/human-body.png" alt="Human Body" id="body-image">
+        </div>
+        <div class="scroll-content">
+            <section class="section-item home" data-target="home">
+                <div class="scroll-item">
+                    <div class="item-img">
+                        <img src="/assets/img/mer-illustration.png" alt="Illustration mer">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-title">Présentation</h3>
+                        <p>Ce site propose de découvrir les similitudes entre les organes du corps humain et l'océan.<br />
+                        En comparant leurs fonctions et leurs rôles essentiels, vous découvrirez comment ces deux univers, pourtant si différents, partagent des points communs surprenants.<br /><br />
+                        Explorez ces parallèles et apprenez-en davantage sur le lien entre l'humain et la nature en scrollant.</p>
+                    </div>
+                </div>
+            </section>
+            <section class="section-item" data-target="coeur">
+                <div class="scroll-item">
+                    <div class="item-img">
+                        <img src="/assets/img/coeur-courent.jpg" alt="Illustration mer">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-title">Cœur et Marées</h3>
+                        <p>Le cœur pompe le sang dans tout le corps à un rythme constant, tout comme les marées rythment les cycles de l’océan, influençant la vie marine et terrestre.</p>
+                    </div>
+                </div>
+            </section>
+            <section class="section-item" data-target="poumons">
+                <div class="scroll-item">
+                    <div class="item-img">
+                        <img src="/assets/img/poumon-vague.webp" alt="Illustration mer">
+                    </div>
+                    <div class="item-content">
+                    <h3 class="item-title">Poumons et Plancton</h3>
+                    <p>Les poumons absorbent et diffusent l'oxygène dans le sang pour alimenter le corps, tout comme le plancton dans l'océan produit une grande partie de l'oxygène sur Terre grâce à la photosynthèse.</p>
+                    </div>
+                </div>
+            </section>
+            <section class="section-item" data-target="cerveau">
+                <div class="scroll-item">
+                    <div class="item-img">
+                        <img src="/assets/img/cerveau-abysse.png" alt="Illustration mer">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-title">Cerveau et Profondeurs Abyssales</h3>
+                        <p>Le cerveau est un organe complexe et mystérieux, tout comme les abysses de l’océan, qui recèlent de nombreux secrets encore inexplorés.</p>
+                    </div>
+                </div>
+            </section>
+            <section class="section-item" data-target="veines">
+                <div class="scroll-item">
+                    <div class="item-img">
+                        <img src="/assets/img/mer3.webp" alt="Illustration mer">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-title">Veines et Courants Océaniques</h3>
+                        <p>Les veines transportent le sang pour nourrir les organes, tout comme les courants océaniques distribuent les nutriments, régulent la température et maintiennent l'équilibre des écosystèmes marins.</p>
+                    </div>
+                </div>
+            </section>
+            <section class="section-item" data-target="peau">
+                <div class="scroll-item">
+                    <div class="item-img">
+                        <img src="/assets/img/mer-illustration.png" alt="Illustration mer">
+                    </div>
+                    <div class="item-content">
+                        <h3 class="item-title">Peau et Surface de l'Océan</h3>
+                        <p>La peau protège le corps des agressions extérieures tout en régulant la température, tout comme la surface de l'océan agit comme une barrière réactive au climat et aux phénomènes naturels.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="podcast-container">
+        <section class="podcast-section" id="podcast-section">
+            <div class="podcast-list">
+                <h3 class="podcast-title">Écouter nos podcast !</h3>
+                <div class="podcast-item">
+                    <img src="/assets/img/cerveau.png" alt="Podcast 1">
+                    <div class="podcast-info">
+                        <h4>Épisode 1 - Le cerveau</h4>
+                        <button class="play-btn" data-audio="/assets/audio/au1.mp3">
+                            <svg class="player-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21.4086 9.35258C23.5305 10.5065 23.5305 13.4935 21.4086 14.6474L8.59662 21.6145C6.53435 22.736 4 21.2763 4 18.9671L4 5.0329C4 2.72368 6.53435 1.26402 8.59661 2.38548L21.4086 9.35258Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="podcast-item">
+                    <img src="/assets/img/poumon.png" alt="Podcast 2">
+                    <div class="podcast-info">
+                        <h4>Épisode 2 - Les poumons</h4>
+                        <button class="play-btn" data-audio="/assets/audio/au2.mp3">
+                            <svg class="player-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21.4086 9.35258C23.5305 10.5065 23.5305 13.4935 21.4086 14.6474L8.59662 21.6145C6.53435 22.736 4 21.2763 4 18.9671L4 5.0329C4 2.72368 6.53435 1.26402 8.59661 2.38548L21.4086 9.35258Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="podcast-player">
+                <div class="player-controls">
+                    <button id="player-play">
+                        <svg class="player-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21.4086 9.35258C23.5305 10.5065 23.5305 13.4935 21.4086 14.6474L8.59662 21.6145C6.53435 22.736 4 21.2763 4 18.9671L4 5.0329C4 2.72368 6.53435 1.26402 8.59661 2.38548L21.4086 9.35258Z"/>
+                        </svg>
+                    </button>
+                    <button id="player-rewind">
+                        <svg class="player-icon" viewBox="0 -2 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="Dribbble-Light-Preview" transform="translate(-104.000000, -3805.000000)" fill="#fff">
+                                    <g id="icons" transform="translate(56.000000, 160.000000)">
+                                        <path d="M59.9990013,3645.86816 L59.9990013,3652.13116 C59.9990013,3652.84516 58.8540013,3653.25316 58.2180013,3652.82516 L53.9990013,3650.14016 L53.9990013,3652.13116 C53.9990013,3652.84516 53.4260013,3653.25316 52.7900013,3652.82516 L48.4790013,3649.69316 C47.9650013,3649.34616 47.7980013,3648.65316 48.3120013,3648.30616 L52.7900013,3645.17516 C53.4260013,3644.74616 53.9990013,3645.15416 53.9990013,3645.86816 L53.9990013,3647.85916 L58.2180013,3645.17516 C58.8540013,3644.74616 59.9990013,3645.15416 59.9990013,3645.86816"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </button>
+                    <button id="player-forward">
+                        <svg class="player-icon" viewBox="0 -2 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="Dribbble-Light-Preview" transform="translate(-144.000000, -3805.000000)" fill="#fff">
+                                    <g id="icons" transform="translate(56.000000, 160.000000)">
+                                        <path d="M99.684,3649.69353 L95.207,3652.82453 C94.571,3653.25353 94,3652.84553 94,3652.13153 L94,3650.14053 L89.78,3652.82453 C89.145,3653.25353 88,3652.84553 88,3652.13153 L88,3645.86853 C88,3645.15453 89.145,3644.74653 89.78,3645.17453 L94,3647.85953 L94,3645.86853 C94,3645.15453 94.571,3644.74653 95.207,3645.17453 L99.516,3648.30653 C100.03,3648.65353 100.198,3649.34653 99.684,3649.69353"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </button>
+                </div>
+                <div class="player-progressBar">
+                    <span id="player-current-time">0:00</span>
+                    <input type="range" id="player-progress" min="0" value="0">
+                    <span id="player-duration">0:00</span>
+                </div>
+            </div>
+        </section>        
+    </div>
+    <div class="home-background"></div>
+
+    <!-- <script src="https://cdn.rawgit.com/namuol/cheet.js/master/cheet.min.js" type="text/javascript"></script> -->
+    <!-- <script src="http://nuitinfo.cyclonicforce.fr/raceforwater/lyreco/lyreco.js"></script> -->
+</body>
+</html>
