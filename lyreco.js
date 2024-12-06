@@ -63,9 +63,61 @@ lyreco_img.onload = function() {
 
 };
 
+// Function to open the modal
+function openModal() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'block';
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+    modal.style.zIndex = '1000';
+
+    const modalContent = document.getElementById('modalContent');
+    modalContent.style.position = 'absolute';
+    modalContent.style.top = '50%';
+    modalContent.style.left = '50%';
+    modalContent.style.transform = 'translate(-50%, -50%)';
+    modalContent.style.backgroundColor = 'white';
+    modalContent.style.padding = '20px';
+    modalContent.style.borderRadius = '8px';
+    modalContent.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+}
+
+// Function to close the modal
+function closeModal() {
+    const element = document.getElementById('Lyreco_element');
+    element.remove();
+}
+
+
+
+function triggerModal(url) {
+    const modal = `<div id="modal" style="display: none;">
+        <div id="modalContent">
+            <button onclick="closeModal();">&times;</button>
+            <iframe scr="${url}"></iframe>
+        </div>
+    </div>`;
+    const element = document.getElementById('Lyreco_element');
+    element.innerHTML = modal;
+    openModal();
+}
+
 
 function triggerAnnimation() {
-    alert("sfuejhn");
+    const element = document.getElementById('Lyreco_element');
+    element.style.width = `${window.innerWidth}px`;
+    element.style.height = `${window.innerHeight}px`;
+    lyreco_img.style.width = `${window.innerWidth}px`;
+    lyreco_img.style.height = `${window.innerHeight}px`;
+    element.style.top = '0px';
+    element.style.left = '0px';
+
+    triggerModal("test.html");
+    lyreco_img.style.display = "none";
 }
 
 function positionElementRandomly() {
@@ -99,8 +151,8 @@ function addSweating() {
     img2.src = './assets/sweating.png';
     img2.alt = 'Sweating';
 
-    img2.height = img.height / 1.5;
-    img2.width = img.width / 3;
+    img2.height = lyreco_img.height / 1.5;
+    img2.width = lyreco_img.width / 3;
 
     img2.style.position = "absolute";
     img2.style.top = 0;
