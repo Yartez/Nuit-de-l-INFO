@@ -1,6 +1,6 @@
-CREATE DATABASE worst_clicker;
+CREATE DATABASE nom_de_la_base_de_données;
 
-USE worst_clicker;
+USE nom_de_la_base_de_données;
 
 CREATE TABLE sessions (
     id INT AUTO_INCREMENT PRIMARY KEY,
