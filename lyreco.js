@@ -31,6 +31,8 @@ let annimTriggered = false;
 lyreco_div.className = 'random-element';
 lyreco_div.id = 'Lyreco_element';
 
+lyreco_div.style.zIndex = 999;
+
 lyreco_div.style.opacity = 0.25;
 lyreco_div.style.transition = "left 0.3s ease, top 0.3s ease";
 lyreco_div.style.position = "absolute";
