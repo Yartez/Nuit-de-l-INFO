@@ -155,6 +155,7 @@
 
             // Fonction pour incrémenter le compteur
             function incrementCompteur() {
+                playRandomAudio();
                 fetch('update_compteur.php')
                     .then(response => response.text())
                     .then(data => {
