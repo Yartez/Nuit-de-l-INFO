@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 session_start();
 
 // Connexion à la base de données
-$conn = new mysqli('localhost', 'root', '', 'worst_clicker');
+$conn = new mysqli('localhost', 'nouvel_utilisateur', 'mot_de_passe', 'nom_de_la_base_de_données');
 
 // Vérifier la connexion
 if ($conn->connect_error) {
