@@ -32,7 +32,7 @@
 <body>
     <div id="compteurAffichage">Chargement...</div>
     <button id="clicker" class="clicker-button">Cliquer (si tu oses)</button>
-    <button class="button" id="data-but" onclick="loadData()">Charger les données</button>
+    <button class="button" id="data-but">Charger les données</button>
 
     <div class="data-container" id="data-container"></div>
 
@@ -45,6 +45,9 @@
                 })
                 .catch(error => console.error('Erreur AJAX:', error));
         }
+        documen.getElementById('data-but').addEventListener('click', function() {
+            loadData();
+        });
         function loadData() {
             let rang = 0;  // Ligne initiale
             let colonnes = ['id', 'session_id', 'ip_address', 'user_agent', 'ancien_compteur', 'nouveau_compteur', 'update_time'];  // Noms des colonnes
