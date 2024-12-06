@@ -1,119 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coffu' Klique</title>
-    <script>
-        let score = 0;
-        let scoreElement = document.getElementById("score");
-        setInterval(() => {
-            score++;
-            scoreElement.innerHTML = score; 
-        }, 1000);
-    </script>
+    <title>Le Clicker de l'Enfer</title>
+    <style>
+        body {
+            background-color: #ff69b4;
+            font-family: "Comic Sans MS", cursive;
+        }
+        .clicker-button {
+            font-size: 48px;
+            padding: 20px;
+            background-color: lime;
+            border: 5px solid magenta;
+            cursor: pointer;
+        }
+        #compteurAffichage {
+            font-size: 64px;
+        }
+        .data-container {
+            margin-top: 20px;
+        }
+        .data-box {
+            background-color: #32CD32;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 10px;
+        }
+    </style>
 </head>
-<body style="overflow: hidden;">
-    <div>
-        <section style="position: absolute; height: 110%; width: 34%; background-color: black; top: -25px; left:-10px;"></section>
-            <h2>Section 1</h2>
-            <p>This is the first section.</p>
-        </section>
-        <section style="position: absolute; height: 110%; width: 34%; background-color: rgb(251, 255, 0); top: -25px; left: 33%;">
+<body>
+    <div id="compteurAffichage">Chargement...</div>
+    <button id="clicker" class="clicker-button">Cliquer (si tu oses)</button>
 
-        </section>
-        <section style="position: absolute; height: 110%; width: 34%; background-color: rgb(255, 0, 0); top: -25px; left: 66%;">
-
-        </section>
-        <div class="irail" style="position: absolute; display: flex; height: 140px; top: 90%; left: -10px;">
-            <img src="Images\Plan de travail 1.png" alt=""> <!--Aboule-->
-        </div>
-    </div>
-    <div>
-        <div style="position: absolute;transform: rotate(-10deg); background-color: rgb(255, 1, 149); padding: 10px; position: absolute; top: -260px; left: -60px; width: 3000px; height: 400px;">
-            <h1 style="display: flex; margin-top: 65px; margin-left: 65px;">Welcome to Coffu' Klique</h1>
-            <p>Blahaj forever</p>
-            <div style="position: absolute;transform: rotate(-40deg); background-color: rgb(94, 255, 1); padding: 10px; position: absolute; top: 300px; left: 10px; width: 150px; height: 40px;">
-                <h1>Score :</h1>
-                <span id="compteurAffichage">
-<!--il faut saucissoner le tableau-->
-                </span>
-            </div>
-        </div>
-    <div style="display: grid; place-content: center;">
-        <img src="Images\Sans titre-3.jpg" id="clicker" alt="" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); transition: all 0.3s;">
-        <h1>TFRGHRTSHSTGDRHDRTHEDRTYHDTYHDGFCJDT</h1>
-    </div>
-    <div style="position: fixed; top: 59%;">
-        <img class="itrain" src="Images\bbadf58d-a712-458b-bcbc-aee02366e537_rw_3840.png" alt="">
-    </div>
-    <div">
-        <div>
-            <img class="proto" src="Images\Ripoint_Henri_BOYKISSERmeme.png" alt="" style="position: absolute; width: 30%; bottom:-20%; cursor: pointer; transform: translateY(0%);" onclick="zoomImage()">
-        </div>
-
-        <script>
-            function zoomImage() {
-                const image = document.querySelector(".proto"); // mon petit sigma
-                image.style.transform = "scale(3)";
-                image.style.bottom = "40%";
-                image.style.left = "35%";
-                image.style.transition = "transform 0.1s";
-            }
-        </script>
-    </div>
-    </div>
-
-
-    <div class="advanced-controls"  style="z-index: 1000; position: relative;">
-        <input id="angleSlider" type="range" min="-180" max="180" step="0.02" value="0">
-        <output id="angleDisplay">0°</output>
-      </div>
-
-        <script>
-            const angleSlider = document.getElementById("angleSlider");
-            const angleDisplay = document.getElementById("angleDisplay");
-            const img = document.querySelector(".itrain");
-            const img2 = document.querySelector(".irail");
-            angleSlider.addEventListener("input", () => {
-            const angle = angleSlider.value;
-            angleDisplay.textContent = `${angle}°`;
-            img.style.transform = `rotate(${angle}deg)`;
-            img2.style.transform = `rotate(${angle}deg)`;
-            });
-        </script>
-      
-    <div style="display: grid; place-content: center;">
-        <script>
-            function getRandomImage() {
-                const images = ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png","10.png","11.png","12.png","13.png","14.png","15.png","16.png","17.png","18.png","19.png","20.png","21.png","22.png",]; // Add your image filenames here
-                const randomIndex = Math.floor(Math.random() * images.length);
-                const randomImage = images[randomIndex];
-                return randomImage;
-            }
-
-            const randomImage = getRandomImage();
-            const imageElement = document.createElement("img");
-            imageElement.src = `Images/ligmaco/${randomImage}`;
-            imageElement.alt = "Random Image";
-            imageElement.style.position = "absolute";
-            imageElement.style.left = "50%";
-            imageElement.style.top = "90%";
-            imageElement.style.width = "300px";
-            imageElement.style.transform = "translate(-50%, -50%)";
-            imageElement.style.transition = "all 0.3s";
-            imageElement.style.zIndex = "";
-
-            const container = document.querySelector("div[style='display: grid; place-content: center;']");
-            container.appendChild(imageElement);
-        </script>
-    </div>
-
-<di<v>
-        <img src="Images\maxwell-pat-pat.gif" alt="Maxwell's demon animation" style="position:absolute; width: 300px; height: auto; right: 0px; bottom:0; z-index: 999999999999999999999;">
-    </div>
-    
-
+    <div class="data-container" id="data-container"></div>
+    <audio id="audioPlayer" controls style="display:none;">
     <script>
         const audioFiles = ['Thursday at 21-35(1).m4a',
                             'Thursday at 21-35(2).m4a',
@@ -253,4 +174,4 @@
         });
     </script>
 </body>
-</html></div>
+</html>
