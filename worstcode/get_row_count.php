@@ -1,28 +1,31 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// Exemple de get_row_count.php
+header('Content-Type: application/json');
 
-// Connexion à la base de données
-$conn = new mysqli('localhost', 'nouvel_utilisateur', 'mot_de_passe', 'nom_de_la_base_de_données');
+try {
+    // Connexion à la base de données (ajuste les paramètres selon ta configuration)
+    $conn = new mysqli('localhost', 'nouvel_utilisateur', 'mot_de_passe', 'nom_de_la_base_de_données');
 
-// Vérifier la connexion
-if ($conn->connect_error) {
-    die("Connexion échouée : " . $conn->connect_error);
+    // Vérifie si la connexion a réussi
+    if ($conn->connect_error) {
+        throw new Exception("Connexion échouée : " . $conn->connect_error);
+    }
+
+    // Requête pour obtenir le nombre de lignes dans la table sessionhistoire
+    $sql = "SELECT COUNT(*) AS total_rows FROM sessionhistoire";
+    $result = $conn->query($sql);
+
+    // Vérifie si la requête a réussi
+    if ($result) {
+        $row = $result->fetch_assoc();
+        echo json_encode(['total_rows' => $row['total_rows']]);
+    } else {
+        throw new Exception("Erreur lors de la récupération des données.");
+    }
+
+    $conn->close();
+} catch (Exception $e) {
+    // Envoie un message d'erreur en cas d'exception
+    echo json_encode(['error' => $e->getMessage()]);
 }
-
-// Requête pour récupérer le nombre de lignes dans la table `sessionhistoire`
-$sql = "SELECT COUNT(*) AS total_rows FROM sessionhistoire";
-$result = $conn->query($sql);
-
-if ($result) {
-    $row = $result->fetch_assoc();
-    $total_rows = $row['total_rows'];
-    // Renvoi du nombre de lignes en JSON
-    echo json_encode(['total_rows' => $total_rows]);
-} else {
-    echo json_encode(['error' => 'Erreur lors de la récupération des données']);
-}
-
-$conn->close();
 ?>
